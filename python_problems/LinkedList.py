@@ -9,6 +9,8 @@ class Node:
         return str(self.data)
     def __hash__(self):
         return self.data.__hash__()
+
+
 class LinkedListIter:
     def __init__(self,node):
         self.node = node
@@ -21,7 +23,8 @@ class LinkedListIter:
             return cur
         else:
             raise StopIteration()
-        
+
+
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -65,8 +68,11 @@ def test():
     print(a)
     b = LinkedList()
     b.append(6)
+    b.append(5)
     print(b)
     c = a + b
     print(c)
-test()
+
+if __name__ == "__main__":
+    test()
 

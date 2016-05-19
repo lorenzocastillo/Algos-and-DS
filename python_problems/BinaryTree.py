@@ -141,10 +141,3 @@ class BinaryTree:
 
 
 
-import re
-def ip(s):
-    pattern = (r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
-    print(re.match(pattern,s))
-
-ip('1.2,3,4')
-ip('fjoj')
