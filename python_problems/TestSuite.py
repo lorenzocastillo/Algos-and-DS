@@ -1,4 +1,4 @@
-def decorate(f):
+def Test(f):
     def g():
         print("\nTesting %s: " % f.__name__)
         f()

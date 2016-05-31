@@ -1,4 +1,4 @@
-from TestSuite import decorate, Assert
+from TestSuite import Test, Assert
 
 
 def binary_search(arr, x, lo = 0, hi = None):
@@ -112,12 +112,12 @@ def sparse_search(arr, x):
     return -1
 
 
-@decorate
+@Test
 def test_find_rotation():
     pass
 
 
-@decorate
+@Test
 def test_find_first_last():
     f = find_first_last
     arr_even = [1, 2, 2, 2, 2, 4, 5, 7, 8, 10, 10, 12, 20, 20, 21, 34]
@@ -131,7 +131,7 @@ def test_find_first_last():
     Assert((0,0), f, [55], 55)
 
 
-@decorate
+@Test
 def test_count_occurrences():
     arr = [1, 2, 2, 2, 2, 4, 5, 7, 8, 10, 10, 12, 20, 20, 21, 34]
     f = count_occurrences
@@ -140,7 +140,7 @@ def test_count_occurrences():
     Assert(4, f, arr, 2)
 
 
-@decorate
+@Test
 def test_sparse_search():
     pass
 
@@ -152,7 +152,8 @@ def test():
     test_sparse_search()
 
 if __name__ == '__main__':
-    test()
+    #test()
+    pass
 
 # def best_sell_(arr):
 #     best = 1
@@ -170,3 +171,14 @@ if __name__ == '__main__':
 #
 # print(best_sell_([20, 8, 7, 11, 5, 3, 1]))
 #
+
+def fib(N):
+    if N == 0:
+        return [0]
+    result = [0,1]
+    for i in range(2,N):
+        result.append(result[i-2] + result[i-1])
+    return result
+
+N = int(1)
+print(list(map(lambda x : x**3, fib(N))))
