@@ -65,7 +65,6 @@ def solution_if_sorted(iter1, iter2):
 
     return False
 
-
 def test():
 
     inputs_a = [(1,2,3,4),[3,6,1,4,7,9],[],[1,1,1,1,1],[],[1],[1],"dawg",set([1,2,3])]

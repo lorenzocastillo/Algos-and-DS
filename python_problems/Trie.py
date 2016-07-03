@@ -18,6 +18,7 @@ class TrieNode:
         else:
             return None
 
+
 def print_trie(trie, depth=0):
     if len(trie) == 0:
         print("--" * (depth) + '*')

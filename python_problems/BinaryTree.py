@@ -150,6 +150,8 @@ def test():
 
     print(tree.is_balanced())
     print(tree2.is_balanced())
+    for node in tree:
+        print(node)
 
 if __name__ == '__main__':
     test()

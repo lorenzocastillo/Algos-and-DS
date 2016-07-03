@@ -9,6 +9,7 @@ def change(amount, denominations):
         return 0
     else:
         current_coin, denominations_left = denominations[0], denominations[1:]
+        # Number of ways to change amount using the coin and not using it.
         ways = 0
         while amount >= 0:
             ways += change(amount, denominations_left)
@@ -28,7 +29,6 @@ def change_2(amount, denominations):
     return ways_of_making_n_cents[amount]
 
 
-
-denominations = [1,2,3]
-print(change(9, denominations))
-print(change_2(9, denominations))
+denominations = [1,2]
+print(change(4, denominations))
+print(change_2(4, denominations))

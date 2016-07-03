@@ -1,6 +1,10 @@
 from collections import defaultdict
 
+"""
+Given a list of baby names with their frequencies, and synonyms for the names, print the total number of frequencies
+for that name including the synonyms
 
+"""
 def union(arr, a,b):
     num = arr[a]
     for i, val in enumerate(arr):
@@ -13,6 +17,12 @@ def find(arr, a,b):
 
 
 def baby_names(names_frequencies, synonyms):
+    """
+
+    :param names_frequencies:
+    :param synonyms:
+    :return:
+    """
     arr = list()
     name_to_group = dict()
     group_to_name = dict()
@@ -39,6 +49,14 @@ def baby_names(names_frequencies, synonyms):
 
 
 def baby_names2(name_frequencies, synonyms):
+    """
+    Build a graph of synonyms. This will create connected subgraphs for all the synonyms of each game. We will then
+    traverse the graph, keeping track of the frequencies of the names. Once a subgraph is traversed, we will print the
+    total frequency for that subgraph.
+    :param name_frequencies:
+    :param synonyms:
+    :return:
+    """
     edges = defaultdict(list)
     for name1, name2 in synonyms:
         edges[name1].append(name2)

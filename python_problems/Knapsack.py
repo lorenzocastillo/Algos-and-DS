@@ -1,20 +1,23 @@
 from TestSuite import Assert
 
 
-def knapsack(c, items):
-    if c < 0:
-        return 0
-    else:
-        max_val = -10000
-        for w,v in items:
-            if c - w == 0:
-                max_val = max(max_val, v)
-            else:
-                val_i = knapsack(c - w, items)
-                val_i = val_i + v if val_i > 0 else 0
-                max_val = max(val_i, max_val)
-
-        return max_val
+def knapsack(capacity, cakes):
+    for w, v in cakes:
+        if w == 0 and v != 0:
+            return float('inf')
+    cache = {}
+    def aux(cap, val):
+        if cap < 0:
+            return 0
+        elif cap == 0:
+            return val
+        else:
+            max_val = 0
+            for w,v in cakes:
+                if v != 0:
+                    max_val = max(max_val, aux(cap - w, val + v))
+            return max_val
+    return aux(capacity,0)
 
 
 def knapsack_dynamic(capacity, items):
@@ -69,7 +72,7 @@ def knapsack_iter(capacity, items):
 
 def test():
 
-    for f in [knapsack_dynamic, knapsack_iter]:
+    for f in [knapsack,knapsack_dynamic,knapsack_iter]:
         Assert(0, f, 0, [(1,40)])
         Assert(float('inf'), f, 100, [(0,40)])
         Assert(200, f, 3, [(1, 10), (3, 200), (0,0)])

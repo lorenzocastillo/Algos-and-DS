@@ -24,7 +24,6 @@ def longest_word(words):
                 left = w[:i]
                 right = w[i:]
                 if left in cache and cache[left] == True and aux(right, False):
-                    cache[left] = True
                     return True
             cache[w] = False
             return cache[w]
