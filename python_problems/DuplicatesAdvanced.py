@@ -1,3 +1,8 @@
+"""
+Given an array of integers, determine if there are any fuzzy duplicates a distance of k from each other.
+A fuzzy duplicate is a value that differs by d
+Ex: fuzzy_dup(4, d= 2) -> 2, 3, 4, 5, 6
+"""
 from helpers.RandomGenerators import get_iterable
 from python_problems.TestSuite import Assert
 
