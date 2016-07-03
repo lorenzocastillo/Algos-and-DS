@@ -1,10 +1,19 @@
+"""
+Sudoku Solver based on Peter Norvig's implementation:
+http://norvig.com/sudoku.html
+"""
 from collections import namedtuple
-from itertools import chain
+
+
 class Validator:
+    """
+    Takes in a Sudoku Board object, and determines whether board has a valid Sudoku Solution
+    """
     def __init__(self, board):
-        self.board = board
+        self.board = board.board
         self.ROWS = board.ROWS
         self.COLS = board.COLS
+        self.subs = board.subs
 
     def is_row_valid(self, row):
         return len({num for num in self.board[row]}) == self.ROWS
@@ -53,15 +62,12 @@ class Board:
         self.COLS = 9
         self.DIGITS = '123456789'
 
-        board = input_board
-
         def initialize_board():
-            k = 0
+            cell = iter(input_board)
             for i in range(self.ROWS):
                 self.board.append(list())
                 for j in range(self.COLS):
-                    self.board[i].append(board[k])
-                    k += 1
+                    self.board[i].append(next(cell))
 
         initialize_board()
 
@@ -186,24 +192,5 @@ print(board)
 board.solve()
 print(board)
 
-#
-# def cross(A, B):
-#     "Cross product of elements in A and elements in B."
-#     return [a+b for a in A for b in B]
-#
-# digits   = '123456789'
-# rows     = 'ABCDEFGHI'
-# cols     = digits
-# squares  = cross(rows, cols)
-# unitlist = ([cross(rows, c) for c in cols] +
-#             [cross(r, cols) for r in rows] +
-#             [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
-# units = dict((s, [u for u in unitlist if s in u])
-#              for s in squares)
-# peers = dict((s, set(sum(units[s],[]))-set([s]))
-#              for s in squares)
-#
-# print("Squares", squares)
-# print("Unit list", unitlist)
-# print("Units", units)
-# print("Peers", peers)
+v = Validator(board)
+print(v.is_valid())
