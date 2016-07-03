@@ -1,39 +1,45 @@
+"""
+Imagine a histogram. Design an algorithm to compute the volume of water it could hold if someone poured water across
+the top.
+          |
+  ________|              |
+ |        |______________|
+ |        |        |     |
+ |        |        |     |_____
+ |        |        |     |     |
+[4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0] => 26
+
+"""
+
 def volume(histograms):
+    """
+    Preprocess the running max at index i.
+    Start from the right of the histograms, determining the second tallest bar.
+    If the second_tallest is taller than the current bar,
+        increment the vol <- second_tallest - cur
+    :param histograms: list of non-negative integers
+    :return: the volume of the filled histograms
+    """
+    left_max = histograms[0]
+    left_maxes = list()
+    for elem in histograms:
+        left_max = max(left_max, elem)
+        left_maxes.append(left_max)
 
-    def find_max(start,end):
-        if start < 0 or start >= end:
-            return 0, 0
+    print(left_maxes)
 
-        res = start,histograms[start]
-        for i in range(start, end + 1):
-            cur = i, histograms[i]
-            res = max(res, cur, key=lambda x: x[1])
-        return res
+    max_right = 0
+    vol = 0
 
-    def fill(start, end, val):
-        for i in range(start,end):
-            histograms[i] = val - histograms[i]
+    for i in reversed(range(0, len(histograms))):
+        max_right = max(max_right, histograms[i])
+        second_tallest = min(max_right, left_maxes[i])
 
-    def vol(start, end):
-        if start <= end:
-            max_for_range = find_max(start, end)
-            max_left = find_max(start, max_for_range[0]-1)
-            if max_left != (0, 0):
-                fill(max_left[0] + 1, max_for_range[0], min(max_left[1], max_for_range[1]))
-                vol(start, max_left[0] - 1)
-                histograms[max_left[0]] = 0
+        if second_tallest > histograms[i]:
+            vol += second_tallest - histograms[i]
 
-            max_right = find_max(max_for_range[0] + 1, end)
-            if max_right != (0, 0):
-                fill(max_for_range[0] + 1, max_right[0], min(max_right[1], max_for_range[1]))
-                vol(max_right[0], end)
-                histograms[max_right[0]] = 0
-            histograms[max_for_range[0]] = 0
-    vol(0, len(histograms) - 1)
+    return vol
 
-    print(histograms, sum(histograms))
 
-# volume([4, 0, 0 ,6])
-# volume([5, 0, 1])
-volume([4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0])
+print(volume([4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0]))
 
