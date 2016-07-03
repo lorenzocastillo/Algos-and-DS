@@ -1,3 +1,6 @@
+"""
+An implementation of a Trie
+"""
 from collections import defaultdict
 from TestSuite import Assert
 
@@ -32,11 +35,12 @@ def build_trie(arr):
     cur = root = TrieNode()
     for string in arr:
         cur = root
-        for letter in string:
+        for i,letter in enumerate(string):
             cur.children[letter].data = letter
             cur = cur.children[letter]
 
     return root
+
 
 def find_prefix(string, trie):
     cur = trie
@@ -57,6 +61,7 @@ def find_prefix(string, trie):
 
 def solution(arr):
     trie = build_trie(arr)
+    print_trie(trie)
     return [find_prefix(string,trie) for string in arr]
 
 
