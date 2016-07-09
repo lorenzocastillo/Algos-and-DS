@@ -1,10 +1,12 @@
-from collections import defaultdict
-
 """
 Given a list of baby names with their frequencies, and synonyms for the names, print the total number of frequencies
 for that name including the synonyms
 
 """
+from collections import defaultdict
+from helpers.TestSuite import  Assert
+
+
 def union(arr, a,b):
     num = arr[a]
     for i, val in enumerate(arr):
@@ -72,14 +74,22 @@ def baby_names2(name_frequencies, synonyms):
                 count += dfs(synonym) + name_frequencies[synonym]
         return count
 
-    for name in name_frequencies.keys():
+    # Sorting to give consistent output in test function
+    result = list()
+    for name in sorted(name_frequencies.keys()):
         if name not in visited:
             visited.add(name)
             count = name_frequencies[name]
             count += dfs(name)
-            print(name, count)
+            result.append((name, count))
+    return result
 
+def test():
+    names_freqs = {'john': 15, 'jon': 12, 'chris': 13, 'kris': 4, 'christopher': 20, 'phil': 5}
+    synonyms = [('john', 'jon'), ('chris', 'kris'), ('chris', 'christopher')]
+    answer = [('chris', 37), ('john', 27), ('phil', 5)]
+    f = baby_names2
+    Assert(answer, f, names_freqs, synonyms)
 
-names_freqs = {'john':15,'jon':12,'chris':13,'kris':4,'christopher':20,'phil':5}
-synonyms = [('john','jon'),('chris','kris'),('chris','christopher')]
-baby_names2(names_freqs, synonyms)
+if __name__ == '__main__':
+    test()
