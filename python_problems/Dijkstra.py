@@ -1,5 +1,6 @@
 import heapq
 from collections import defaultdict
+INF = 100000
 
 
 def dijkstra(start):
@@ -8,35 +9,36 @@ def dijkstra(start):
     heapq.heappush(q, (0, start))
 
     while q:
-        cur = heapq.heappop(q)
-        cur_dist, cur = cur
-        visited.add(cur)
-        for adj in edges[cur]:
-            if adj not in visited:
-                if cur_dist + distances[(cur, adj)] < distances[(start,adj)]:
-                    distances[(start, adj)] = cur_dist + distances[(cur, adj)]
-                heapq.heappush(q, (distances[(start,adj)], adj))
+        dist_s_v, v = heapq.heappop(q)
+        visited.add(v)
+        for w in edges[v]:
+            if w not in visited:
+                distance[(start, w)] = min(distance[(start, w)], dist_s_v + distance[(v, w)])
+                heapq.heappush(q, (distance[(start, w)], w))
 
     for w in vertices:
-        print(start, w, distances[(start, w)])
+        print(start, w, distance[(start, w)])
 
 
 def add_edge(v, w, d):
     edges[v].append(w)
-    distances[(v,w)] = d
+    distance[(v, w)] = d
 
 
 def fill():
+    """
+    for all the distances not set, it will set the distance to and from the same vertex to 0, and distances between
+    non connected vertices to INF
+    :return:
+    """
     for i, v in enumerate(vertices):
-        for j in range(len(vertices)):
-            w = vertices[j]
+        for j, w in enumerate(vertices):
             if i == j:
-                distances[(v, w)] = 0
-                distances[(w, v)] = 0
+                distance[(v, w)] = distance[(w, v)] = 0
             else:
                 if w not in edges[v]:
-                    distances[(v, w)] = 100000
-distances = dict()
+                    distance[(v, w)] = INF
+distance = dict()
 edges = defaultdict(list)
 
 vertices = ['a', 'b', 'c', 'd', 'e']
@@ -50,7 +52,7 @@ add_edge('d', 'e', 70)
 add_edge('e', 'b', 50)
 fill()
 
-print(distances)
+print(distance)
 print(edges)
 
 for vertex in vertices:
