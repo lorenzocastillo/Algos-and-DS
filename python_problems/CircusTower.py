@@ -14,26 +14,26 @@ def circus_tower(arr):
 
     for person in arr:
         temp = ((person),)
-        print(temp)
         find_longest(person, temp)
 
     best.sort(key=len)
 
-    print('Best: ', best[-1])
+    #print('Best: ', best[-1])
+    return best
 
 
 def circus_tower2(arr):
 
-    def get_neighbors(elem, cur_tower, v):
-        return [person for person in arr if elem != person and person not in v]
+    def get_neighbors(elem):
+        return [person for person in arr if elem != person and person not in visited]
 
     cache = dict()
     visited = set()
 
-    def find_longest2(cur, tower):
+    def find_longest(cur, tower):
         if cur in cache:
             return cache[cur]
-        neighbors = get_neighbors(cur, tower, visited)
+        neighbors = get_neighbors(cur)
         if not neighbors:
             return [cur]
         else:
@@ -41,7 +41,7 @@ def circus_tower2(arr):
             for neighbor in neighbors:
                 if neighbor <= tower[-1]:
                     visited.add(neighbor)
-                    best = max(find_longest2(neighbor, tower + (neighbor,)), best, key=len)
+                    best = max(find_longest(neighbor, tower + (neighbor,)), best, key=len)
                     visited.remove(neighbor)
             cache[cur] = [cur] + best
             return cache[cur]
@@ -50,18 +50,20 @@ def circus_tower2(arr):
     for person in arr:
         temp = ((person),)
         visited.add(person)
-        best = max(find_longest2(person, temp), best, key=len)
+        best = max(find_longest(person, temp), best, key=len)
         visited.remove(person)
 
     return best
 
 arr = [(65,100),(70,150),(56,90),(75,190),(60,95),(68,110)]
-print(circus_tower2(arr))
+#print(circus_tower2(arr))
 
 from timeit import Timer
 setup = """
-from __main__ import circus_tower2
+from __main__ import circus_tower2, circus_tower
 arr = [(65,100),(70,150),(56,90),(75,190),(60,95),(68,110),(66,105),(62,98),(73,188),(74,189)]
 """
+t = Timer(stmt='circus_tower(arr)', setup=setup).timeit(number=100)
+print(t)
 t = Timer(stmt='circus_tower2(arr)', setup=setup).timeit(number=100)
 print(t)

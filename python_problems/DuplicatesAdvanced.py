@@ -3,8 +3,7 @@ Given an array of integers, determine if there are any fuzzy duplicates a distan
 A fuzzy duplicate is a value that differs by d
 Ex: fuzzy_dup(4, d= 2) -> 2, 3, 4, 5, 6
 """
-from helpers.RandomGenerators import get_iterable
-from python_problems.TestSuite import Assert
+from helpers.TestSuite import Assert
 
 
 def dups(arr, k=10000, d=0):

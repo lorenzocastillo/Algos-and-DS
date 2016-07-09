@@ -1,3 +1,6 @@
+"""
+Given some amount and coin denominations, find the number of ways to make change for that amount.
+"""
 
 
 def change(amount, denominations):
@@ -8,16 +11,10 @@ def change(amount, denominations):
     elif len(denominations) == 0:
         return 0
     else:
-        current_coin, denominations_left = denominations[0], denominations[1:]
-        # Number of ways to change amount using the coin and not using it.
-        ways = 0
-        while amount >= 0:
-            ways += change(amount, denominations_left)
-            amount -= current_coin
-        return ways
+        return change(amount - denominations[0], denominations) + change(amount, denominations[1:])
 
 
-def change_2(amount, denominations):
+def change_iter(amount, denominations):
     ways_of_making_n_cents = [0]* (amount+1)
     ways_of_making_n_cents[0] = 1
 
@@ -31,4 +28,4 @@ def change_2(amount, denominations):
 
 denominations = [1,2]
 print(change(4, denominations))
-print(change_2(4, denominations))
+print(change_iter(4, denominations))

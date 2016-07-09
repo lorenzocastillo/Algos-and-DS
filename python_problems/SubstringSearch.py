@@ -39,8 +39,7 @@ def rabin_karp(text, pattern):
         text_hash = (text_hash + Q - RM * ord(text[i-M]) % Q) % Q
         text_hash = (text_hash * R + ord(text[i])) % Q
         if text_hash == pattern_hash:
-            same = is_sub_same(i)
-            if same:
+            if is_sub_same(i):
                 return i - M + 1
 
     return -1
@@ -50,25 +49,28 @@ def boyer_moore(text, pattern):
     N = len(text)
     M = len(pattern)
 
-    right = dict()
-    for t in text:
-        right[t] = -1
+    def generate_offsets():
+        right = {t: -1 for t in text}
 
-    for j,p in enumerate(pattern):
-        if p not in right:
-            return -1
-        right[pattern] = j
+        for j, p in enumerate(pattern):
+            if p not in right:
+                return -1
+            right[p] = j
+        return right
 
-    skip = 1
-    for i in range(0, N - M + 1, skip):
+    offsets = generate_offsets()
+
+    i = 0
+    while i < (N - M + 1):
         skip = 0
         for j in reversed(range(0, M)):
             if pattern[j] != text[i + j]:
-                skip = max(1, j - right[text[i+j]])
+                skip = max(1, j - offsets[text[i+j]])
                 break
-            if skip == 0:
-                return i
+        if skip == 0:
+            return i
+        i += skip
     return -1
 
-print(rabin_karp(' sum lists', 'sum'))
-print(boyer_moore(' sum lists', 'sum'))
+# print(rabin_karp('Xsum lists', 'sum'))
+print(boyer_moore('XxxsumsXlists', 'sums'))
