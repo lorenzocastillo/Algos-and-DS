@@ -32,7 +32,7 @@ def find_repeat(arr):
     start = 0
     end = len(arr) - 1
     while start <= end:
-        mid = int((start + end)/2)
+        mid = (start + end) // 2
         count_lt, count_e = count_le(arr, mid)
         if count_e > 1:
             return mid
@@ -43,5 +43,5 @@ def find_repeat(arr):
     raise RuntimeError("No duplicates")
 
 
-arr = [2,1,4,5,3,2]
+arr = [2, 1, 4, 5, 3, 2]
 print(find_repeat(arr))
