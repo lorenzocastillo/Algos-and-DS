@@ -1,4 +1,3 @@
-from TestSuite import Assert
 """
 Your company built an in-house calendar tool called HiCal. You want to add a feature to see the times in a day when everyone is available.
 To do this, you’ll need to know when any team is having a meeting. In HiCal, a meeting is stored as tuples ↴ of integers (start_time, end_time).
@@ -7,14 +6,15 @@ These integers represent the number of 30-minute blocks past 9:00am.
 ex: (0,1) 9:00AM - 9:30AM
     (6,9) 12:00PM - 1:30PM
 """
+from helpers.TestSuite import Assert
+
 
 def condense_meeting_times(arr):
     sorted_meets = sorted(arr)
-    result = []
+    result = list()
     cur_meeting = sorted_meets[0]
-    for i, meeting in enumerate(sorted_meets):
-        if i == 0:
-            continue
+    for i in range(1, len(sorted_meets)):
+        meeting = sorted_meets[i]
 
         start, end = meeting
         early_start, cur_end = cur_meeting
