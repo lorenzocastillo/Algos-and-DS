@@ -15,17 +15,17 @@ def dups(arr, k=10000, d=0):
     :return:
     """
     bins = dict()
+    d += 1  # To prevent division by zero
     for i, a in enumerate(arr):
-        b = a // (d+1)
+        b = a // d
         for delta in (-1, 0, 1):
-            if b+delta in bins and abs(bins[b+delta] - a) <= d:
+            if b+delta in bins and abs(bins[b+delta] - a) < d:
                 print("%i is a duplicate " % a)
                 return True
         bins[b] = a
         old = i - k
         if old >= 0:
-            del bins[arr[old]//(d+1)]
-
+            del bins[arr[old]//d ]
     return False
 
 
