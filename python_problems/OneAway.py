@@ -12,17 +12,18 @@ def solution(str1, str2):
     :param str2:
     :return:
     """
+    if len(str1) - len(str2) > 1:
+        return False  # impossible for it to be distance one away if their lengths differ by more than 1
+
     if len(str1) < len(str2):
         str1, str2 = str2, str1
-
-    if len(str1) - len(str2) > 1:
-        return False # impossible for it to be distance one away if their lengths differ by more than 1
 
     for i, _ in enumerate(str2):
         if str1[i] != str2[i]:
             return str1[i + 1:] == str2[i:]
 
     return True
+
 
 def test():
     inputs_a = ['ab','ba','abc','abcd', 'abc','','','abcdef']
