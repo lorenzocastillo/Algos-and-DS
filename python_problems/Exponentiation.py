@@ -1,4 +1,9 @@
-def power(base,exp):
+"""
+Given a base and an exponent, write a power function.
+"""
+from helpers.TestSuite import Assert
+
+def power(base, exp):
     is_negative = False
     if exp < 0:
         is_negative = True
@@ -22,17 +27,11 @@ def power(base,exp):
     else:
         return result
 
-print(power(2,8))
-print(power(2,5))
-print(power(2,-6))
+def test():
+    assert pow(2, 8) == power(2, 8)
+    assert pow(2, 5) == power(2, 5)
+    assert pow(2, -6) == power(2, -6)
+    print("All tests passed. ")
 
-import timeit
-setup = """
-import sys
-
-value = sys.maxsize
-"""
-t = timeit.Timer(stmt='value & 1 == 0',setup=setup).timeit(number=1000000)
-print(t)
-t = timeit.Timer(stmt='value % 2 == 0',setup=setup).timeit(number=1000000)
-print(t)
+if __name__ == '__main__':
+    test()
