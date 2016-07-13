@@ -6,7 +6,7 @@ from helpers.TestSuite import Assert
 from python_problems.Permutations import permutations_nodups
 
 
-def permutation_dist(string, d=0):
+def permutation_dist(string, d=1):
     def get_next():
         """
         Determine which item to use
