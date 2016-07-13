@@ -186,11 +186,21 @@ class Board:
                 result.append("\n")
         return " ".join(result)
 
-board = Board("""4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......""")
-#board = Board("""003020600900305001001806400008102900700000008006708200002609500800203009005010300""".replace('0','.'))
-print(board)
-board.solve()
-print(board)
+def test():
+    #  Easy Board
+    board = Board("""4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......""")
+    board.solve()
+    validator = Validator(board)
+    assert validator.is_valid()
 
-v = Validator(board)
-print(v.is_valid())
+    #  Hard board
+    board = Board("""003020600900305001001806400008102900700000008006708200002609500800203009005010300""".replace('0','.'))
+    board.solve()
+    validator = Validator(board)
+    assert validator.is_valid()
+    print("Success")
+
+
+if __name__ == '__main__':
+    test()
+
