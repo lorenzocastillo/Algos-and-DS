@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from python_problems.LinkedList import LinkedList
+from DataStructures.LinkedList import LinkedList
 
 
 def distribute(a_list, val):

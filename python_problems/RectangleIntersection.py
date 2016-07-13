@@ -1,4 +1,3 @@
-from TestSuite import Assert
 """
 Given two non-diagonally placed rectangles, find the rectangle of interception between the two.
 A rectangle is represented as:
@@ -11,6 +10,7 @@ rect = {
 }
 
 """
+from helpers.TestSuite import Assert
 
 
 def find_overlap(l1, w1, l2, w2):
