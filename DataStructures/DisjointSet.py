@@ -1,3 +1,9 @@
+"""
+A disjoint-set data structure with weighting and path compression.
+https://en.wikipedia.org/wiki/Disjoint-set_data_structure
+"""
+
+
 class DisjointSet:
     def __init__(self, n):
         self.arr = list()
@@ -53,8 +59,3 @@ class DisjointSet:
 
     def __repr__(self):
         return repr(self.arr)
-
-
-ds = DisjointSet(10)
-ds.union(0,1)
-print(ds)
