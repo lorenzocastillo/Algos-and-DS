@@ -5,6 +5,7 @@ value in the knapsack.
 
 from helpers.TestSuite import Assert
 
+
 def knapsack(capacity, items):
     cache = dict()
 
@@ -45,7 +46,6 @@ def knapsack_iter(capacity, items):
             return float('inf')
 
     for cur_capacity in range(capacity + 1):
-
         for w, v in items:
             remaining = cur_capacity - w
             if remaining >= 0:
@@ -68,5 +68,3 @@ def test():
 
 if __name__ == '__main__':
     test()
-
-print(knapsack(20, [(7, 160), (3, 90), (2, 15)]))
