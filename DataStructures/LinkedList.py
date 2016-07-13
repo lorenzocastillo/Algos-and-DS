@@ -1,4 +1,7 @@
-
+"""
+A double-ended LinkedList class supporting iteration, reversal, partitioning and insertion at the end and back of the
+list.
+"""
 
 class Node:
     def __init__(self,data):
