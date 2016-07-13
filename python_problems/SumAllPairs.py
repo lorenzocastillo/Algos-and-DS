@@ -2,7 +2,7 @@
 Given a list of integers and some number k,
 find if there is one pair of integers that sum to k
 """
-from BinarySearch import binary_search
+from python_problems.BinarySearch import binary_search
 
 
 def solution_by_set(arr, k):
