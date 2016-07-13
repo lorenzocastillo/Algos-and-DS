@@ -8,6 +8,15 @@ abaabcb, k=2 => abcb or aabc
 from helpers.TestSuite import Assert
 
 
+def range_size(x):
+    """
+    determines the size of a range x
+    :param x: a range tuple (start, end)
+    :return: the size of the range
+    """
+    return x[1] - x[0]
+
+
 def longest_substring(arr, k=1):
     """
     Keep track of the last index of each character encountered. Whenever the number of distinct characters encountered
@@ -27,7 +36,7 @@ def longest_substring(arr, k=1):
             start = last[letter] + 1
             del last[letter]
 
-        longest = max(longest, (start, i), key=lambda x: x[1] - x[0])
+        longest = max(longest, (start, i), key=range_size)
 
     return longest
 
