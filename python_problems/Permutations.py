@@ -3,7 +3,7 @@ from collections import Counter
 def distribute(a, lst):
     result = list()
     for elem in lst:
-        for i in range(len(elem)+ 1):
+        for i in range(len(elem) + 1):
             result.append(elem[:i] + a + elem[i:])
     return result
 
@@ -13,8 +13,8 @@ def permutations(string):
         if i == len(s):
             return ['']
         else:
-            return distribute(s[0],permute(s,i + 1))
-    return permute(string)
+            return distribute(s[i],permute(s, i + 1))
+    return permute(string, 0)
 
 
 def permutations_nodups(string):
