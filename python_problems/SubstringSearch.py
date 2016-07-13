@@ -1,3 +1,9 @@
+"""
+Popular substring search algorithms
+"""
+from helpers.TestSuite import Assert
+
+
 def rabin_karp(text, pattern):
 
     R = 256 # Size of the radix
@@ -61,7 +67,7 @@ def boyer_moore(text, pattern):
     offsets = generate_offsets()
 
     i = 0
-    while i < (N - M + 1):
+    while i <= (N - M):
         skip = 0
         for j in reversed(range(0, M)):
             if pattern[j] != text[i + j]:
@@ -72,5 +78,14 @@ def boyer_moore(text, pattern):
         i += skip
     return -1
 
-# print(rabin_karp('Xsum lists', 'sum'))
-print(boyer_moore('XxxsumsXlists', 'sums'))
+
+def test():
+    patterns = ['NEEDLE', 'AA']
+    texts = ['INAHAYSTACKNEEDLEINA', 'ABCDEFG']
+    funcs = [boyer_moore, rabin_karp]
+    for pattern, text in zip(patterns, texts):
+        for f in funcs:
+            Assert(11, f, text, pattern)
+
+if __name__ == '__main__':
+    test()
